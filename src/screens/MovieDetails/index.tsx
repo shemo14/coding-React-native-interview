@@ -1,10 +1,13 @@
 import React from 'react';
 import {View, Text} from 'react-native';
 
-const MovieDetails = () => {
+const MovieDetails = (props: any) => {
+  const {id} = props.route.params;
   return (
     <View>
-      <Text>This is a MovieDetails Screen ...</Text>
+      <Text style={{color: '#fff'}}>
+        This is a MovieDetails Screen ... {id}
+      </Text>
     </View>
   );
 };

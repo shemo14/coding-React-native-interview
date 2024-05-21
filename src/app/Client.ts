@@ -21,10 +21,8 @@ export class Client {
   };
 
   private createAxiosInstance() {
-    // to create an instance of Axios with the BaseURL
     this._axiosInstance = axios.create(this.defaultOptions());
 
-    // Add a response interceptor
     this._axiosInstance.interceptors.response.use(
       (response: any) => {
         try {
