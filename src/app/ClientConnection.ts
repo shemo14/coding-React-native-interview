@@ -14,16 +14,16 @@ type ApisConfigType = {
 const ApisConfig: ApisConfigType = {
   TMDB: {
     baseUrl: 'https://api.themoviedb.org/3/',
-    apiKey: 'api_key=4127b96cc79318b6b63a97f8bda628b3',
+    apiKey: '?api_key=4127b96cc79318b6b63a97f8bda628b3',
   },
   youtube: {
-    baseUrl: 'https://www.googleapis.com/youtube/v3',
-    apiKey: 'key=AIzaSyCzMYwhzPOVpaPNw_Oi0wfLyvcef2I15Ys',
+    baseUrl: 'https://www.googleapis.com/youtube/v3/',
+    apiKey: '&key=AIzaSyCzMYwhzPOVpaPNw_Oi0wfLyvcef2I15Ys&type=video',
   },
 };
 
 const buildPath = (path: string, type: 'TMDB' | 'youtube') =>
-  `${path}?${ApisConfig[type]?.apiKey}`;
+  `${path}${ApisConfig[type]?.apiKey}`;
 
 const client = (type: 'TMDB' | 'youtube') =>
   new Client(ApisConfig[type]?.baseUrl);

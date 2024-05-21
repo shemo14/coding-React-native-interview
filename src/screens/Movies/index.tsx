@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {View, Text, FlatList} from 'react-native';
+import {View, FlatList} from 'react-native';
 import {getMovies} from '../../features/movies/requests';
 import {useAppDispatch, useAppSelector} from '../../app/reduxHooks';
 import MovieItem from '../../components/MovieItem';
