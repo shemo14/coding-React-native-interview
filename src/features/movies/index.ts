@@ -1,10 +1,12 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {Movie, MoviesResponse} from './interfaces';
-import {getMovies, getMovieDetails} from './requests';
+import {getMovies, getMovieDetails, getMoviesSearch} from './requests';
 
 export interface MoviesState {
   moviesResponse: MoviesResponse;
+  searchResponse: MoviesResponse | null;
   movieDetails: Movie | null;
+  loading: boolean;
 }
 
 const initialState: MoviesState = {
@@ -14,7 +16,9 @@ const initialState: MoviesState = {
     total_pages: 0,
     total_results: 0,
   },
+  searchResponse: null,
   movieDetails: null,
+  loading: false,
 };
 
 export const MoviesSlice = createSlice({
@@ -22,9 +26,13 @@ export const MoviesSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: builder => {
+    builder.addCase(getMovies.pending, state => {
+      state.loading = true;
+    });
     builder.addCase(
       getMovies.fulfilled,
       (state, action: PayloadAction<any>) => {
+        state.loading = false;
         state.moviesResponse = action.payload;
       },
     );
@@ -32,6 +40,12 @@ export const MoviesSlice = createSlice({
       getMovieDetails.fulfilled,
       (state, action: PayloadAction<any>) => {
         state.movieDetails = action.payload;
+      },
+    );
+    builder.addCase(
+      getMoviesSearch.fulfilled,
+      (state, action: PayloadAction<any>) => {
+        state.searchResponse = action.payload;
       },
     );
   },

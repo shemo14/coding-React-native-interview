@@ -1,11 +1,13 @@
 import React, {useEffect} from 'react';
-import {View, FlatList} from 'react-native';
+import {FlatList} from 'react-native';
 import {getMovies} from '../../features/movies/requests';
 import {useAppDispatch, useAppSelector} from '../../app/reduxHooks';
 import MovieItem from '../../components/MovieItem';
+import {Container, SearchInput} from '../../common';
 
 const Movies = () => {
   const movies = useAppSelector(state => state.movies.moviesResponse);
+  const loading = useAppSelector(state => state.movies.loading);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -13,13 +15,14 @@ const Movies = () => {
   }, [dispatch]);
 
   return (
-    <View style={{flex: 1, paddingHorizontal: 10}}>
+    <Container loading={loading}>
+      <SearchInput />
       <FlatList
         data={movies?.results}
         renderItem={({item}: any) => <MovieItem movie={item} />}
         numColumns={3}
       />
-    </View>
+    </Container>
   );
 };
 

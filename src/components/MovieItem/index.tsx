@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  Text,
   TouchableOpacity,
   View,
   Dimensions,
@@ -10,13 +9,14 @@ import {Movie} from '../../features/movies/interfaces';
 import {imgPath} from '../../app/ClientConnection';
 import {useNavigation} from '@react-navigation/native';
 import {screens} from '../../navigation/ScreensEnum.ts';
+import Text from '../../common/Text';
 
 const {width} = Dimensions.get('window');
 const MovieItem = ({movie}: {movie: Movie}) => {
   const navigation = useNavigation();
   return (
     <TouchableOpacity
-      onPress={() => navigation.navigate(screens.MovieDetails, {id: movie.id})}
+      onPress={() => navigation.navigate(screens.MovieDetails, {movie})}
       style={{
         flex: 1,
         alignItems: 'center',
@@ -36,7 +36,9 @@ const MovieItem = ({movie}: {movie: Movie}) => {
             height: 'auto',
             padding: 2,
           }}>
-          <Text style={{color: '#fff'}}>{movie.original_title}</Text>
+          <Text type={'p4'} style={{color: '#fff'}}>
+            {movie.original_title}
+          </Text>
         </View>
       </ImageBackground>
     </TouchableOpacity>

@@ -14,7 +14,7 @@ type ApisConfigType = {
 const ApisConfig: ApisConfigType = {
   TMDB: {
     baseUrl: 'https://api.themoviedb.org/3/',
-    apiKey: '?api_key=4127b96cc79318b6b63a97f8bda628b3',
+    apiKey: 'api_key=4127b96cc79318b6b63a97f8bda628b3',
   },
   youtube: {
     baseUrl: 'https://www.googleapis.com/youtube/v3/',
