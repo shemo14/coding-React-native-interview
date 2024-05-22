@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
 import {View, TouchableOpacity, TextInput} from 'react-native';
 import {Container, Text, SwitchBox} from '../../common';
-import {useTheme} from '@react-navigation/native';
+import {useTheme, useNavigation} from '@react-navigation/native';
 import {Genres} from '../../components';
+import {screens} from '../../navigation/ScreensEnum';
 
 const Search = () => {
   const {colors} = useTheme();
@@ -10,13 +11,27 @@ const Search = () => {
   const [includeAdult, setIncludeAdult] = useState<boolean>(false);
   const [includeVideo, setIncludeVideo] = useState<boolean>(false);
   const [year, setYear] = useState<string>('');
+  const navigation = useNavigation();
+
+  const onFilter = () => {
+    const query = `?include_adult=${includeAdult}&include_video=${includeVideo}&with_genres=${selectedGenres.toString()}&primary_release_year=${year}`;
+    navigation.navigate(screens.SearchResult, {query});
+  };
 
   return (
     <Container>
       <View style={{flex: 1}}>
         <Genres onSelectGenres={setSelectedGenres} />
-        <SwitchBox label={'Include Adult'} />
-        <SwitchBox label={'Include Video'} />
+        <SwitchBox
+          onValueChange={setIncludeAdult}
+          label={'Include Adult'}
+          value={includeAdult}
+        />
+        <SwitchBox
+          label={'Include Video'}
+          onValueChange={setIncludeVideo}
+          value={includeVideo}
+        />
         <View>
           <Text type={'p2'} style={{color: colors.black, marginBottom: 10}}>
             Release Year
@@ -40,6 +55,7 @@ const Search = () => {
         </View>
       </View>
       <TouchableOpacity
+        onPress={() => onFilter()}
         style={{
           width: '70%',
           height: 45,

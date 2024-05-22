@@ -8,7 +8,7 @@ import {useTheme} from '@react-navigation/native';
 const Genres = ({onSelectGenres}) => {
   const {colors} = useTheme();
   const dispatch = useAppDispatch();
-  const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
+  const [selectedGenres, setSelectedGenres] = useState<number[]>([]);
   const genres = useAppSelector(state => state.movies.genres);
 
   useEffect(() => {
@@ -19,13 +19,13 @@ const Genres = ({onSelectGenres}) => {
     onSelectGenres(selectedGenres);
   }, [onSelectGenres, selectedGenres]);
 
-  const selectGenresHandler = (genre: string) => {
-    if (selectedGenres.includes(genre)) {
+  const selectGenresHandler = (genreId: number) => {
+    if (selectedGenres.includes(genreId)) {
       setSelectedGenres(selectedGenres =>
-        selectedGenres.filter(item => item !== genre),
+        selectedGenres.filter(item => item !== genreId),
       );
     } else {
-      setSelectedGenres([...selectedGenres, genre]);
+      setSelectedGenres([...selectedGenres, genreId]);
     }
   };
 
@@ -43,10 +43,10 @@ const Genres = ({onSelectGenres}) => {
         }}>
         {genres.map((genre, i) => (
           <TouchableOpacity
-            onPress={() => selectGenresHandler(genre.name)}
+            onPress={() => selectGenresHandler(genre.id)}
             key={i}
             style={{
-              backgroundColor: selectedGenres.includes(genre.name)
+              backgroundColor: selectedGenres.includes(genre.id)
                 ? colors.black
                 : colors.primary,
               padding: 5,
@@ -56,7 +56,7 @@ const Genres = ({onSelectGenres}) => {
             <Text
               type={'p4'}
               style={{
-                color: selectedGenres.includes(genre.name)
+                color: selectedGenres.includes(genre.id)
                   ? colors.white
                   : colors.black,
               }}>

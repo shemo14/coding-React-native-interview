@@ -1,7 +1,7 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import TabNavigation from './TabNavigation';
-import {MovieDetails} from '../screens';
+import {MovieDetails, SearchResult} from '../screens';
 import {screens} from './ScreensEnum.ts';
 import {useTheme} from '@react-navigation/native';
 
@@ -22,6 +22,11 @@ const StackNavigation = () => {
         options={({route}) => ({title: route?.params?.movie?.title})}
         name={screens.MovieDetails}
         component={MovieDetails}
+      />
+      <Stack.Screen
+        options={{title: 'Search Result'}}
+        name={screens.SearchResult}
+        component={SearchResult}
       />
     </Stack.Navigator>
   );

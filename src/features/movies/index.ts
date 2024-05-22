@@ -5,6 +5,7 @@ import {
   getMovieDetails,
   getMoviesSearch,
   getGenres,
+  moviesDiscover,
 } from './requests';
 
 export interface MoviesState {
@@ -12,6 +13,7 @@ export interface MoviesState {
   searchResponse: MoviesResponse | null;
   movieDetails: Movie | null;
   genres: Genre[];
+  moviesDiscover: MoviesResponse | null;
   loading: boolean;
 }
 
@@ -25,6 +27,7 @@ const initialState: MoviesState = {
   searchResponse: null,
   movieDetails: null,
   genres: [],
+  moviesDiscover: null,
   loading: false,
 };
 
@@ -59,6 +62,12 @@ export const MoviesSlice = createSlice({
       getGenres.fulfilled,
       (state, action: PayloadAction<any>) => {
         state.genres = action.payload;
+      },
+    );
+    builder.addCase(
+      moviesDiscover.fulfilled,
+      (state, action: PayloadAction<any>) => {
+        state.moviesDiscover = action.payload;
       },
     );
   },

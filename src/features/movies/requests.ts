@@ -4,6 +4,7 @@ import {
   apiGetMovieDetails,
   apiGetMoviesSearch,
   apiGetGenres,
+  apiMoviesDiscover,
 } from './api';
 import {Genre, Movie, MoviesResponse} from './interfaces';
 
@@ -49,6 +50,18 @@ export const getGenres = createAsyncThunk<Genre[]>(
     try {
       const {data} = await apiGetGenres();
       return data.genres;
+    } catch (e) {
+      console.error('---ERROR---', e);
+    }
+  },
+);
+
+export const moviesDiscover = createAsyncThunk<MoviesResponse, string>(
+  'movies/moviesDiscover',
+  async query => {
+    try {
+      const {data} = await apiMoviesDiscover(query);
+      return data;
     } catch (e) {
       console.error('---ERROR---', e);
     }
