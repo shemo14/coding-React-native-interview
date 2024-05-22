@@ -1,3 +1,5 @@
+import {getGenres} from './requests.ts';
+
 type belongsToCollection = {
   id: number;
   name: string;
@@ -9,6 +11,11 @@ type genres = {
   id: number;
   name: string;
 };
+
+export interface Genre {
+  name: string;
+  id: number;
+}
 
 export interface Movie {
   adult: boolean;

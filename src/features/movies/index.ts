@@ -1,11 +1,17 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {Movie, MoviesResponse} from './interfaces';
-import {getMovies, getMovieDetails, getMoviesSearch} from './requests';
+import {Movie, MoviesResponse, Genre} from './interfaces';
+import {
+  getMovies,
+  getMovieDetails,
+  getMoviesSearch,
+  getGenres,
+} from './requests';
 
 export interface MoviesState {
   moviesResponse: MoviesResponse;
   searchResponse: MoviesResponse | null;
   movieDetails: Movie | null;
+  genres: Genre[];
   loading: boolean;
 }
 
@@ -18,6 +24,7 @@ const initialState: MoviesState = {
   },
   searchResponse: null,
   movieDetails: null,
+  genres: [],
   loading: false,
 };
 
@@ -46,6 +53,12 @@ export const MoviesSlice = createSlice({
       getMoviesSearch.fulfilled,
       (state, action: PayloadAction<any>) => {
         state.searchResponse = action.payload;
+      },
+    );
+    builder.addCase(
+      getGenres.fulfilled,
+      (state, action: PayloadAction<any>) => {
+        state.genres = action.payload;
       },
     );
   },

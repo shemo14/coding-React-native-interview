@@ -1,6 +1,11 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
-import {apiGetMovies, apiGetMovieDetails, apiGetMoviesSearch} from './api';
-import {Movie, MoviesResponse} from './interfaces';
+import {
+  apiGetMovies,
+  apiGetMovieDetails,
+  apiGetMoviesSearch,
+  apiGetGenres,
+} from './api';
+import {Genre, Movie, MoviesResponse} from './interfaces';
 
 export const getMovies = createAsyncThunk<MoviesResponse>(
   'movies/getAllMovies',
@@ -32,6 +37,18 @@ export const getMoviesSearch = createAsyncThunk<MoviesResponse, string>(
     try {
       const {data} = await apiGetMoviesSearch(query);
       return data;
+    } catch (e) {
+      console.error('---ERROR---', e);
+    }
+  },
+);
+
+export const getGenres = createAsyncThunk<Genre[]>(
+  'movies/getGenres',
+  async () => {
+    try {
+      const {data} = await apiGetGenres();
+      return data.genres;
     } catch (e) {
       console.error('---ERROR---', e);
     }

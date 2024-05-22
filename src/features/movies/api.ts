@@ -12,4 +12,7 @@ const apiGetMoviesSearch = async (query: string) =>
     buildPath(`search/movie?query=${encodeURIComponent(query)}&`, apiType),
   );
 
-export {apiGetMovies, apiGetMovieDetails, apiGetMoviesSearch};
+const apiGetGenres = async () =>
+  client(apiType).get(buildPath('genre/movie/list?', apiType));
+
+export {apiGetMovies, apiGetMovieDetails, apiGetMoviesSearch, apiGetGenres};
