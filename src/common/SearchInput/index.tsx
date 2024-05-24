@@ -6,6 +6,7 @@ import {useTheme} from '@react-navigation/native';
 import {useAppDispatch, useAppSelector} from '../../app/reduxHooks.ts';
 import {getMoviesSearch} from '../../features/movies/requests.ts';
 import SearchItem from '../SearchItem';
+import styles from './styles';
 
 const SearchInput = () => {
   const {colors} = useTheme();
@@ -27,42 +28,21 @@ const SearchInput = () => {
   };
 
   return (
-    <View style={{zIndex: 1}}>
-      <View
-        style={{
-          width: '100%',
-          height: 40,
-          flexDirection: 'row',
-          padding: 10,
-          borderWidth: 1,
-          borderColor: colors.grey,
-          marginBottom: 10,
-        }}>
+    <View style={styles.container}>
+      <View style={styles.inputView}>
         <TextInput
           placeholder={'Search ....'}
           placeholderTextColor={colors.black}
           onChangeText={searchHandler}
           value={search}
-          style={{
-            flex: 1,
-            height: '100%',
-            color: colors.black,
-          }}
+          style={styles.input}
         />
         <Search width={20} height={20} fill={colors.black} />
       </View>
-      <Animated.View
-        style={{
-          width: '100%',
-          height,
-          backgroundColor: colors.white,
-          position: 'absolute',
-          top: 40,
-          paddingVertical: 15,
-        }}>
+      <Animated.View style={[styles.searchResultContainer, {height}]}>
         <ScrollView>
-          {searchResponse?.results.map(movie => (
-            <SearchItem movie={movie} />
+          {searchResponse?.results.map((movie, i) => (
+            <SearchItem movie={movie} key={i} />
           ))}
         </ScrollView>
       </Animated.View>

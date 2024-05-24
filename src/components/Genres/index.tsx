@@ -4,6 +4,7 @@ import {Text} from '../../common';
 import {useAppDispatch, useAppSelector} from '../../app/reduxHooks';
 import {getGenres} from '../../features/movies/requests.ts';
 import {useTheme} from '@react-navigation/native';
+import styles from './styles';
 
 const Genres = ({
   onSelectGenres,
@@ -35,28 +36,22 @@ const Genres = ({
 
   return (
     <View>
-      <Text type={'p2'} style={{color: colors.black, marginVertical: 10}}>
+      <Text type={'p2'} style={styles.label}>
         Select Genres :
       </Text>
-      <View
-        style={{
-          flexDirection: 'row',
-          width: '100%',
-          alignItems: 'center',
-          flexWrap: 'wrap',
-        }}>
+      <View style={styles.genresContainer}>
         {genres.map((genre, i) => (
           <TouchableOpacity
             onPress={() => selectGenresHandler(genre.id)}
             key={i}
-            style={{
-              backgroundColor: selectedGenres.includes(genre.id)
-                ? colors.black
-                : colors.primary,
-              padding: 5,
-              marginBottom: 10,
-              marginEnd: 10,
-            }}>
+            style={[
+              {
+                backgroundColor: selectedGenres.includes(genre.id)
+                  ? colors.black
+                  : colors.primary,
+              },
+              styles.genre,
+            ]}>
             <Text
               type={'p4'}
               style={{

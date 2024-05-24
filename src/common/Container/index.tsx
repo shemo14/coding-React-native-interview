@@ -1,17 +1,16 @@
 import React from 'react';
 import {View} from 'react-native';
 import Text from '../Text';
+import styles from './style';
 
 const Container = (props: any) => {
   const {loading} = props;
 
   return (
-    <View style={{flex: 1, padding: 10}}>
+    <View style={styles.container}>
       {loading ? (
-        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-          <Text style={{color: '#fff'}} type={'h1'}>
-            {'Im loading now ...............'}
-          </Text>
+        <View style={styles.loaderView}>
+          <Text type={'h1'}>{'Im loading now ...............'}</Text>
         </View>
       ) : (
         props.children

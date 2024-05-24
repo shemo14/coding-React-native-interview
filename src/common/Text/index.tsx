@@ -31,7 +31,9 @@ const Text: React.FC<TextProps & TextAdditionalProps> = props => {
   const {type, children} = props;
 
   return (
-    <RNText {...props} style={[fontCreator(type), props.style]}>
+    <RNText
+      {...props}
+      style={[fontCreator(type), {color: '#fff'}, props.style]}>
       {children}
     </RNText>
   );

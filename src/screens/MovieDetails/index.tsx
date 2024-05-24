@@ -5,7 +5,7 @@ import {useAppDispatch, useAppSelector} from '../../app/reduxHooks';
 import {getMovieTrailer} from '../../features/trailers/requests.ts';
 import YoutubePlayer from 'react-native-youtube-iframe';
 import {Container, Text} from '../../common';
-import {useTheme} from '@react-navigation/native';
+import styles from './styles';
 
 const MovieDetails = (props: any) => {
   const {movie} = props.route.params;
@@ -13,7 +13,6 @@ const MovieDetails = (props: any) => {
   const movieTrailers = useAppSelector(state => state.trailers.trailerResponse);
   const loading = useAppSelector(state => state.movies.loading);
   const dispatch = useAppDispatch();
-  const {colors} = useTheme();
 
   useEffect(() => {
     dispatch(getMovieDetails(movie?.id));
@@ -32,31 +31,14 @@ const MovieDetails = (props: any) => {
         play={false}
         videoId={movieTrailers?.items[0]?.id?.videoId}
       />
-      <Text type={'h2'} style={{color: '#fff', marginVertical: 15}}>
+      <Text type={'h2'} style={styles.title}>
         {movieDetails?.title}
       </Text>
-      <Text type={'p2'} style={{color: '#fff'}}>
-        {movieDetails?.overview}
-      </Text>
-      <View
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'center',
-          alignItems: 'center',
-          marginVertical: 15,
-        }}>
+      <Text type={'p2'}>{movieDetails?.overview}</Text>
+      <View style={styles.movieDetailsContainer}>
         {movieDetails?.genres.map((genre, i) => (
-          <View
-            key={i}
-            style={{
-              padding: 5,
-              backgroundColor: colors.primary,
-              marginHorizontal: 5,
-              borderRadius: 4,
-            }}>
-            <Text type={'i1'} style={{color: '#fff'}}>
-              {genre.name}
-            </Text>
+          <View key={i} style={styles.genresContainer}>
+            <Text type={'i1'}>{genre.name}</Text>
           </View>
         ))}
       </View>
