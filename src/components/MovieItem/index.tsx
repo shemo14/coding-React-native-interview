@@ -1,10 +1,10 @@
 import React from 'react';
-import {TouchableOpacity, View, ImageBackground} from 'react-native';
+import {TouchableOpacity, View} from 'react-native';
 import {Movie} from '../../features/movies/interfaces';
 import {imgPath} from '../../app/ClientConnection';
 import {useNavigation} from '@react-navigation/native';
 import {screens} from '../../navigation/ScreensEnum.ts';
-import Text from '../../common/Text';
+import {Text, Image} from '../../common';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import styles from './styles';
 
@@ -14,14 +14,13 @@ const MovieItem = ({movie}: {movie: Movie}) => {
     <TouchableOpacity
       onPress={() => navigation.navigate(screens.MovieDetails, {movie})}
       style={styles.container}>
-      <ImageBackground
+      <Image
         source={{uri: imgPath(movie.poster_path)}}
-        style={styles.imageBackground}
-        resizeMode={'cover'}>
+        style={styles.imageBackground}>
         <View style={styles.movieTitleContainer}>
           <Text type={'p4'}>{movie.original_title}</Text>
         </View>
-      </ImageBackground>
+      </Image>
     </TouchableOpacity>
   );
 };
