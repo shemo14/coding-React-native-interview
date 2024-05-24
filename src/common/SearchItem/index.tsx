@@ -5,9 +5,10 @@ import {imgPath} from '../../app/ClientConnection.ts';
 import {Text} from '../index.ts';
 import {useNavigation, useTheme} from '@react-navigation/native';
 import {Movie} from '../../features/movies/interfaces.ts';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 const SearchItem = ({movie}: {movie: Movie}) => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<NativeStackNavigationProp<any>>();
   const {colors} = useTheme();
   return (
     <TouchableOpacity

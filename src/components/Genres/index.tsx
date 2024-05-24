@@ -5,7 +5,11 @@ import {useAppDispatch, useAppSelector} from '../../app/reduxHooks';
 import {getGenres} from '../../features/movies/requests.ts';
 import {useTheme} from '@react-navigation/native';
 
-const Genres = ({onSelectGenres}) => {
+const Genres = ({
+  onSelectGenres,
+}: {
+  onSelectGenres: (selectedGenres) => void;
+}) => {
   const {colors} = useTheme();
   const dispatch = useAppDispatch();
   const [selectedGenres, setSelectedGenres] = useState<number[]>([]);

@@ -1,17 +1,17 @@
 import React, {useState} from 'react';
 import {View, TouchableOpacity, TextInput} from 'react-native';
 import {Container, Text, SwitchBox} from '../../common';
-import {useTheme, useNavigation} from '@react-navigation/native';
+import {useTheme} from '@react-navigation/native';
 import {Genres} from '../../components';
 import {screens} from '../../navigation/ScreensEnum';
 
-const Search = () => {
+const Search = props => {
   const {colors} = useTheme();
   const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
   const [includeAdult, setIncludeAdult] = useState<boolean>(false);
   const [includeVideo, setIncludeVideo] = useState<boolean>(false);
   const [year, setYear] = useState<string>('');
-  const navigation = useNavigation();
+  const {navigation} = props;
 
   const onFilter = () => {
     const query = `?include_adult=${includeAdult}&include_video=${includeVideo}&with_genres=${selectedGenres.toString()}&primary_release_year=${year}`;

@@ -10,10 +10,11 @@ import {imgPath} from '../../app/ClientConnection';
 import {useNavigation} from '@react-navigation/native';
 import {screens} from '../../navigation/ScreensEnum.ts';
 import Text from '../../common/Text';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 const {width} = Dimensions.get('window');
 const MovieItem = ({movie}: {movie: Movie}) => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<NativeStackNavigationProp<any>>();
   return (
     <TouchableOpacity
       onPress={() => navigation.navigate(screens.MovieDetails, {movie})}

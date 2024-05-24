@@ -19,7 +19,7 @@ const StackNavigation = () => {
         component={TabNavigation}
       />
       <Stack.Screen
-        options={({route}) => ({title: route?.params?.movie?.title})}
+        options={({route}) => ({title: route?.params?.movie.title})}
         name={screens.MovieDetails}
         component={MovieDetails}
       />
