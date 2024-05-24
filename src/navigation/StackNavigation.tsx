@@ -3,18 +3,21 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import TabNavigation from './TabNavigation';
 import {MovieDetails, SearchResult} from '../screens';
 import {screens} from './ScreensEnum.ts';
-import {useTheme} from '@react-navigation/native';
+import {useTheme, getFocusedRouteNameFromRoute} from '@react-navigation/native';
 
 const Stack = createNativeStackNavigator();
 
 const StackNavigation = () => {
   const {colors} = useTheme();
+
+  const getHeaderTitle = route => getFocusedRouteNameFromRoute(route) ?? 'Home';
+
   return (
     <Stack.Navigator screenOptions={{headerTintColor: colors.primary}}>
       <Stack.Screen
-        options={{
-          title: 'Home',
-        }}
+        options={({route}) => ({
+          headerTitle: getHeaderTitle(route),
+        })}
         name={'TabNavigation'}
         component={TabNavigation}
       />
